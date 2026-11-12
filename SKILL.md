@@ -2,7 +2,7 @@
 name: caiguwang-creator
 slug: caiguwang-creator
 displayName: 才谷网投票
-version: 1.0.2
+version: 1.0.3
 license: MIT
 summary: AI 一句话创建微信投票活动：投票模板检索、批量添加选手、票数榜单与活动数据查询。
 description: |
@@ -25,8 +25,6 @@ description: |
     活动投票、投票系统、投票链接、二维码投票、投票活动怎么弄、怎么发起投票、
     投票工具、投票网站、免费投票、作品评选、摄影投票、美食投票、萌娃投票、绘画投票、
     AI 创建投票、一句话生成投票
-
-summary: AI 一句话创建微信投票活动：投票模板检索、批量添加选手、票数榜单与活动数据查询。
 
 read_when:
   - 用户提到投票、评选、投票活动、投票模板、才谷网
@@ -110,10 +108,10 @@ python scripts/caiguwang_cli.py create \
 | `--intro` | 活动说明（**必填**，面向参与者，长度不限，建议简明） |
 | `--start` / `--end` | 时间，格式 `YYYY-MM-DD HH:MM`；不传默认当前开始、10 天后结束 |
 | `--multi` | 开启多选投票（默认单选） |
-| `--per-user-count` | 每人可投次数（1~20，默认 3） |
+| `--per-user-count` | 每人可投次数（1-20，默认 3） |
 | `--per-user-scope` | `day` 每天 / `total` 活动期间总共（默认 day） |
-| `--select-min` / `--select-max` | 多选时每次最少/最多选几个（min 1~999；max 0~999，0=不限） |
-| `--groups` | 分组名，逗号分隔（2~100 组，单个名称 ≤20 字） |
+| `--select-min` / `--select-max` | 多选时每次最少/最多选几个（min 1-999；max 0-999，0=不限） |
+| `--groups` | 分组名，逗号分隔（2-100 组，单个名称 ≤20 字） |
 | `--apply` | 开启选手报名 |
 | `--template` | 模板 ID（search 返回的 template_id）；不传时 AI 自动匹配 |
 | `--sponsor` / `--sponsor-tel` | 主办方名称/电话 |
