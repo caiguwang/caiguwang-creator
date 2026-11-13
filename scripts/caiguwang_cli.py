@@ -15,6 +15,19 @@ def out(payload):
     print(json.dumps(payload, ensure_ascii=False, indent=2))
 
 
+def _sanitize_auth(result):
+    """安全兜底：剥离 uid/username/nickname 等内部标识（对话内容可能被截图分享，不应外泄）"""
+    data = result.get("data")
+    if isinstance(data, dict):
+        for k in ("uid", "username", "nickname"):
+            data.pop(k, None)
+        if "valid" not in data and result.get("code") == 200:
+            data["valid"] = True
+            if data.get("account") is None:
+                data["account"] = "用户"
+    return result
+
+
 def cmd_auth(args):
     if args.action == "login":
         token = (args.token or "").strip()
@@ -26,7 +39,8 @@ def cmd_auth(args):
         path = config.save_token(token)
         result = client.auth_status()
         if result.get("code") == 200:
-            out({"success": True, "code": 200, "msg": "登录成功，令牌已保存到 %s" % path, "data": result.get("data")})
+            # 不透传接口响应体（旧版接口可能含 uid/username），只报绑定结果
+            out({"success": True, "code": 200, "msg": "登录成功，令牌已保存到 %s" % path})
         else:
             out(result)
     else:
@@ -34,7 +48,7 @@ def cmd_auth(args):
         if not token:
             out({"success": False, "code": 1002, "msg": "未配置令牌，请先执行 login --token <令牌>"})
             return
-        out(client.auth_status())
+        out(_sanitize_auth(client.auth_status()))
 
 
 def cmd_search(args):

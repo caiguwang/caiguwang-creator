@@ -2,7 +2,7 @@
 name: caiguwang-creator
 slug: caiguwang-creator
 displayName: 才谷网投票
-version: 1.0.3
+version: 1.0.4
 license: MIT
 summary: AI 一句话创建微信投票活动：投票模板检索、批量添加选手、票数榜单与活动数据查询。
 description: |
